@@ -49,7 +49,11 @@ bool loadBonMAndBonS_win32(ArrayView<const char> bonm, ArrayView<const char> bon
 
 ## 文件 IO
 
+### 打开文件
 
+### 将文件读取到字符串
+
+### 
 
 ## 数据结构
 
