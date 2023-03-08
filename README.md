@@ -1,20 +1,49 @@
 # cpp
 C++ Coding Style
 
-## C++ 标准
+## 现代 C++ 最佳实践
 
-使用 C++20 标准
+### auto 的使用
+`auto` 很多时候被滥用了，我们允许使用的场景：
+* 模板类型（拼写较长）
 
+例如
+
+## 错误和异常处理
+Bad:
+```
+bool loadBonMAndBonS_win32(ArrayView<const char> bonm, ArrayView<const char> bons, Vector2i size) {
+    _scene.reset(new bon::Scene());
+    if(_scene->loadBonMAndBonS(bonm, bons, size)) {
+        _scene->resize(windowSize());
+        return true;
+    }
+
+    _scene.reset();
+    return false;
+}
+```
+Good:
+```
+bool loadBonMAndBonS_win32(ArrayView<const char> bonm, ArrayView<const char> bons, Vector2i size) {
+    _scene.reset(new bon::Scene());
+    // 错误处理在前
+    if(!_scene->loadBonMAndBonS(bonm, bons, size)) {
+        _scene.reset();
+        return false;
+    }
+    // 成功操作在后
+    _scene->resize(windowSize());
+    return true;
+}
+```
 ## 排版和命名
 
 一、入乡随俗，保持一致性
 
 
 
-## auto 的使用
 
-允许使用的场景：
-* 模板类型（拼写较长）
 
 ## 字符串
 
