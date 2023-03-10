@@ -7,6 +7,14 @@ C++ Coding Style
 `auto` 很多时候被滥用了，我们允许使用的场景：
 * 模板类型（拼写较长）
 
+### [std::ssize()](https://www.cppstories.com/2022/ssize-cpp20/)
+
+```
+for(int i=0; i<ssize(v); i++) {
+    // do sth
+}
+```
+
 例如
 
 ## 错误和异常处理
