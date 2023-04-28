@@ -80,11 +80,13 @@ bool loadBonMAndBonS_win32(ArrayView<const char> bonm, ArrayView<const char> bon
 
 ## 并发
 
-###生产（写）消费（读）模型
+### 生产（写）消费（读）模型
 
-    // 读写队列
+利用 [moodycamel::ReaderWriterQueue](https://github.com/cameron314/readerwriterqueue) 和 [ksThread](https://github.com/bonsmile/lxd/blob/main/threading.h) 实现生产、消费模式并发：
+
+    // 一、创建一个读写队列，生产、消费线程共享
     static ReaderWriterQueue<MySchemeInfo*> g_exportQueue(1024);
-    // 创建消费（读取）线程
+    // 二、创建消费（读取）线程
     static void ExportFunc(void*) {
         MySchemeInfo* g_mySchemeInfo = nullptr;
         while (g_exportQueue.try_dequeue(g_mySchemeInfo) && g_mySchemeInfo) {
@@ -93,7 +95,7 @@ bool loadBonMAndBonS_win32(ArrayView<const char> bonm, ArrayView<const char> bon
     }
     ksThread g_exportThread;
     ksThread_Create(&g_exportThread, "Export", ExportFunc, nullptr);
-    // 生产线程（主线程）
+    // 三、生产线程（主线程）
     int main() {
         // 程序主循环
         MainLoop {
