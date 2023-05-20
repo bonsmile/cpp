@@ -69,7 +69,7 @@ bool loadBonMAndBonS_win32(ArrayView<const char> bonm, ArrayView<const char> bon
 
 在选择数据结构时应优先考虑 std::vector, std::array 这类顺序容器，他们天然是缓存友好的。
 
-### 关联容器
+### [关联容器](https://github.com/greg7mdp/parallel-hashmap)
 
 使用 `phmap::flat_hash_map/set` 替代 `std::unordered_map/set`; 
 
