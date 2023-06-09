@@ -55,6 +55,18 @@ bool loadBonMAndBonS_win32(ArrayView<const char> bonm, ArrayView<const char> bon
 
 ## 字符串
 
+## 正则表达式
+
+找出所有匹配的
+
+    std::wsmatch match;
+    std::wstring wstr(L"测试20220202010101");
+    if (std::regex_search(wstr, match, re) && match.size()) {
+    }
+判断符不符合
+    if(!std::regex_match(_inputCaseId.c_str(), std::regex("[a-np-zA-NP-Z0-9]{4}"))) {
+    }
+
 ## 文件 IO
 
 ### 打开文件
